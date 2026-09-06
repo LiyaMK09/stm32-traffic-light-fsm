@@ -38,6 +38,14 @@ The project was developed using STM32CubeIDE and STM32 HAL.
 - Jumper wires
 - Breadboard
 
+## Circuit Diagram
+
+![Circuit Diagram](images/circuit_diagram.png)
+
+## Hardware Implementation
+
+![STM32 Traffic Light Controller](images/hardware_implementation.jpg)
+
 ## Pin Configuration
 
 |  Component  | STM32 Pin |
@@ -70,6 +78,8 @@ The traffic light is implemented as a finite state machine.
 RED → YELLOW → GREEN → YELLOW → RED
 
 The YELLOW state uses the previous state to determine whether the next state should be GREEN or RED.
+
+![Traffic Light FSM](images/fsm_diagram.png)
 
 ## Non-Blocking Timing
 
