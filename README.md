@@ -1,38 +1,59 @@
-# STM32 Traffic Light Controller
+# STM32 Traffic Light Controller 
 
-A basic traffic light controller implemented using an STM32 microcontroller. The project demonstrates GPIO control, finite state machines, non-blocking timing, external interrupts, and button debouncing.
+A traffic light controller implemented using the STM32F401RE Nucleo board and STM32 HAL libraries.
+
+The project demonstrates fundamental embedded systems concepts including GPIO, external interrupts, finite state machines, non-blocking timing, and software debouncing.
+
+## Overview
+
+This project implements a simple traffic light system using three LEDs:
+
+- 🔴 Red
+- 🟡 Yellow
+- 🟢 Green
+(in the hardware implementation the 3 color LEDs are all represented using red LEDs)
+
+The traffic light operates as a finite state machine. A push button connected to an external interrupt can be used to trigger a transition from the green state to the yellow state.
+
+The project was developed using STM32CubeIDE and STM32 HAL.
 
 ## Features
 
-- Three LED traffic light system
-- Finite State Machine (FSM) implementation
-- Non-blocking timing using HAL_GetTick()
-- Push button input using EXTI interrupt
+- Finite State Machine (FSM) based traffic light control
+- Multiple LED control
+- Push-button input
+- External interrupt using EXTI
 - Software button debouncing
-- STM32 HAL-based implementation
+- Non-blocking timing using 'HAL_GetTick()'
+- STM32 HAL GPIO configuration
+- STM32CubeMX configuration through '.ioc' file
 
-## Hardware Setup
-
-<img width="504" height="627" alt="WhatsApp Image 2026-09-05 at 6 24 15 PM" src="https://github.com/user-attachments/assets/8cfb1c01-50b7-49c1-a5d6-7596a10232fe" />
-
-
-## Hardware Components
+## Hardware
 
 - STM32 NUCLEO-F401RE
 - LED x 3
 - Push button
-- 220Ω resistors x 3
-- Breadboard
+- 470 Ω resistors x 3
 - Jumper wires
+- Breadboard
 
 ## Pin Configuration
 
 |  Component  | STM32 Pin |
 |-------------|-----------|
-|     LED     |    PA5    |
-|     LED     |    PA6    |
-|     LED     |    PA7    |
+|   Red LED   |    PA5    |
+|  Yellow LED |    PA6    |
+|  Green LED  |    PA7    |
 | Push Button |    PA0    |
+
+The push button uses the STM32's internal pull-up resistor.
+
+Therefore:
+
+|    Button   |  PA0 |
+|-------------|------|
+| Not pressed | HIGH |
+|   Pressed   |  LOW |
 
 ## Circuit
 
@@ -63,11 +84,9 @@ while the timer is being checked.
 
 ## Button Interrupt
 
-The push button is configured using an EXTI falling-edge
-interrupt.
+The push button is configured using an EXTI falling-edge interrupt.
 
-When the button is pressed, the interrupt callback sets
-'buttonPressed' to 1.
+When the button is pressed, the interrupt callback sets 'buttonPressed' to 1.
 
 The main FSM then processes this event.
 
