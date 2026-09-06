@@ -44,7 +44,7 @@ The project was developed using STM32CubeIDE and STM32 HAL.
 
 ## Hardware Implementation
 
-![STM32 Traffic Light Controller](images/hardware_implementation.png)
+![STM32 Traffic Light Controller](images/hardware_implementation.jpeg)
 
 ## Pin Configuration
 
