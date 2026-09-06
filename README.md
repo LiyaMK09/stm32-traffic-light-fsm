@@ -11,6 +11,7 @@ This project implements a simple traffic light system using three LEDs:
 - 🔴 Red
 - 🟡 Yellow
 - 🟢 Green
+
 (in the hardware implementation the 3 color LEDs are all represented using red LEDs)
 
 The traffic light operates as a finite state machine. A push button connected to an external interrupt can be used to trigger a transition from the green state to the yellow state.
@@ -70,7 +71,7 @@ RED → YELLOW → GREEN → YELLOW → RED
 
 The YELLOW state uses the previous state to determine whether the next state should be GREEN or RED.
 
-## Timing
+## Non-Blocking Timing
 
 | State | Duration |
 |-------|----------|
@@ -89,6 +90,14 @@ The push button is configured using an EXTI falling-edge interrupt.
 When the button is pressed, the interrupt callback sets 'buttonPressed' to 1.
 
 The main FSM then processes this event.
+
+PA0: HIGH → LOW
+       ↓
+    EXTI0
+       ↓
+HAL_GPIO_EXTI_Callback()
+       ↓
+buttonPressed = 1
 
 ## Debouncing
 
